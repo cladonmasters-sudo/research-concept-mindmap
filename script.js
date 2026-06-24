@@ -2,21 +2,20 @@ let concepts = [];
 
 function addConcept() {
   const name = document.getElementById("conceptInput").value.trim();
-  const type = document.getElementById("conceptType").value;
   const notes = document.getElementById("conceptNotes").value.trim();
 
   if (!name) {
-    alert("Please type a concept name.");
+    alert("Please type an idea.");
     return;
   }
 
   const concept = {
     id: Date.now(),
     name,
-    type,
     notes,
-    x: 80 + concepts.length * 40,
-    y: 80 + concepts.length * 40
+    x: 420 + Math.random() * 250,
+    y: 180 + Math.random() * 250,
+    main: false
   };
 
   concepts.push(concept);
@@ -26,20 +25,41 @@ function addConcept() {
   document.getElementById("conceptNotes").value = "";
 }
 
+function generateFramework() {
+  const title = document.getElementById("researchTitle").value.trim();
+
+  if (!title) {
+    alert("Please type your research title first.");
+    return;
+  }
+
+  concepts = [
+    {
+      id: Date.now(),
+      name: title,
+      notes: "Main research idea",
+      x: 430,
+      y: 300,
+      main: true
+    }
+  ];
+
+  renderConcepts();
+}
+
 function renderConcepts() {
   const mindmap = document.getElementById("mindmap");
   mindmap.innerHTML = "";
 
   concepts.forEach((concept) => {
     const node = document.createElement("div");
-    node.className = `node ${concept.type}`;
+    node.className = concept.main ? "node main" : "node";
     node.style.left = concept.x + "px";
     node.style.top = concept.y + "px";
-    node.setAttribute("data-id", concept.id);
 
     node.innerHTML = `
       <h3>${concept.name}</h3>
-      <p>${concept.notes || "No notes added yet."}</p>
+      <p>${concept.notes || "Brainstorming note"}</p>
       <button onclick="deleteConcept(${concept.id})">Delete</button>
     `;
 
@@ -80,69 +100,22 @@ function deleteConcept(id) {
   renderConcepts();
 }
 
-function generateFramework() {
-  concepts = [
-    {
-      id: 1,
-      name: "Multi-Age ESL Classroom",
-      type: "variable",
-      notes: "Context of the study",
-      x: 450,
-      y: 70
-    },
-    {
-      id: 2,
-      name: "Learners with Diverse Abilities",
-      type: "sped",
-      notes: "SPED connection and learner needs",
-      x: 450,
-      y: 210
-    },
-    {
-      id: 3,
-      name: "Teaching Challenges",
-      type: "question",
-      notes: "Main focus of the research",
-      x: 450,
-      y: 350
-    },
-    {
-      id: 4,
-      name: "Teacher Strategies",
-      type: "methodology",
-      notes: "Inclusive and differentiated practices",
-      x: 450,
-      y: 490
-    },
-    {
-      id: 5,
-      name: "Improved Learner Support",
-      type: "theory",
-      notes: "Expected educational implication",
-      x: 450,
-      y: 630
-    }
-  ];
-
-  renderConcepts();
-}
-
 function saveProject() {
   const project = {
     title: document.getElementById("researchTitle").value,
     problem: document.getElementById("mainProblem").value,
-    concepts: concepts
+    concepts
   };
 
-  localStorage.setItem("researchMindmapProject", JSON.stringify(project));
-  alert("Project saved successfully.");
+  localStorage.setItem("simpleResearchMindmap", JSON.stringify(project));
+  alert("Saved.");
 }
 
 function loadProject() {
-  const saved = localStorage.getItem("researchMindmapProject");
+  const saved = localStorage.getItem("simpleResearchMindmap");
 
   if (!saved) {
-    alert("No saved project found.");
+    alert("No saved mind map yet.");
     return;
   }
 
@@ -153,15 +126,12 @@ function loadProject() {
   concepts = project.concepts || [];
 
   renderConcepts();
-  alert("Project loaded successfully.");
 }
 
 function exportPNG() {
-  const mindmap = document.getElementById("mindmap");
-
-  html2canvas(mindmap).then((canvas) => {
+  html2canvas(document.getElementById("mindmap")).then((canvas) => {
     const link = document.createElement("a");
-    link.download = "research-concept-mindmap.png";
+    link.download = "research-mindmap.png";
     link.href = canvas.toDataURL();
     link.click();
   });
