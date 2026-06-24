@@ -1,35 +1,10 @@
 let concepts = [];
 
-function addConcept() {
-  const name = document.getElementById("conceptInput").value.trim();
-  const notes = document.getElementById("conceptNotes").value.trim();
-
-  if (!name) {
-    alert("Please type an idea.");
-    return;
-  }
-
-  const concept = {
-    id: Date.now(),
-    name,
-    notes,
-    x: 420 + Math.random() * 250,
-    y: 180 + Math.random() * 250,
-    main: false
-  };
-
-  concepts.push(concept);
-  renderConcepts();
-
-  document.getElementById("conceptInput").value = "";
-  document.getElementById("conceptNotes").value = "";
-}
-
-function generateFramework() {
+function startMindMap() {
   const title = document.getElementById("researchTitle").value.trim();
 
   if (!title) {
-    alert("Please type your research title first.");
+    alert("Please type your research title or main idea first.");
     return;
   }
 
@@ -37,7 +12,7 @@ function generateFramework() {
     {
       id: Date.now(),
       name: title,
-      notes: "Main research idea",
+      notes: "Main idea",
       x: 430,
       y: 300,
       main: true
@@ -45,6 +20,28 @@ function generateFramework() {
   ];
 
   renderConcepts();
+}
+
+function addConcept() {
+  const name = document.getElementById("conceptInput").value.trim();
+  const notes = document.getElementById("conceptNotes").value.trim();
+
+  if (!name) {
+    alert("Please type a new idea.");
+    return;
+  }
+
+  concepts.push({
+    id: Date.now(),
+    name: name,
+    notes: notes || "Brainstorming note",
+    x: 150 + Math.random() * 650,
+    y: 120 + Math.random() * 430,
+    main: false
+  });
+
+  renderConcepts();
+  clearInputs();
 }
 
 function renderConcepts() {
@@ -59,7 +56,7 @@ function renderConcepts() {
 
     node.innerHTML = `
       <h3>${concept.name}</h3>
-      <p>${concept.notes || "Brainstorming note"}</p>
+      <p>${concept.notes}</p>
       <button onclick="deleteConcept(${concept.id})">Delete</button>
     `;
 
@@ -71,18 +68,20 @@ function renderConcepts() {
 function makeDraggable(element, id) {
   let offsetX = 0;
   let offsetY = 0;
-  let isDragging = false;
+  let dragging = false;
 
   element.addEventListener("mousedown", function (e) {
-    isDragging = true;
+    dragging = true;
     offsetX = e.clientX - element.offsetLeft;
     offsetY = e.clientY - element.offsetTop;
   });
 
   document.addEventListener("mousemove", function (e) {
-    if (!isDragging) return;
+    if (!dragging) return;
 
     const concept = concepts.find((item) => item.id === id);
+    if (!concept) return;
+
     concept.x = e.clientX - offsetX;
     concept.y = e.clientY - offsetY;
 
@@ -91,7 +90,7 @@ function makeDraggable(element, id) {
   });
 
   document.addEventListener("mouseup", function () {
-    isDragging = false;
+    dragging = false;
   });
 }
 
@@ -100,36 +99,41 @@ function deleteConcept(id) {
   renderConcepts();
 }
 
+function clearInputs() {
+  document.getElementById("conceptInput").value = "";
+  document.getElementById("conceptNotes").value = "";
+}
+
 function saveProject() {
   const project = {
     title: document.getElementById("researchTitle").value,
-    problem: document.getElementById("mainProblem").value,
-    concepts
+    concepts: concepts
   };
 
-  localStorage.setItem("simpleResearchMindmap", JSON.stringify(project));
-  alert("Saved.");
+  localStorage.setItem("researchMindMap", JSON.stringify(project));
+  alert("Mind map saved.");
 }
 
 function loadProject() {
-  const saved = localStorage.getItem("simpleResearchMindmap");
+  const saved = localStorage.getItem("researchMindMap");
 
   if (!saved) {
-    alert("No saved mind map yet.");
+    alert("No saved mind map found.");
     return;
   }
 
   const project = JSON.parse(saved);
 
   document.getElementById("researchTitle").value = project.title || "";
-  document.getElementById("mainProblem").value = project.problem || "";
   concepts = project.concepts || [];
 
   renderConcepts();
 }
 
 function exportPNG() {
-  html2canvas(document.getElementById("mindmap")).then((canvas) => {
+  const mindmap = document.getElementById("mindmap");
+
+  html2canvas(mindmap).then((canvas) => {
     const link = document.createElement("a");
     link.download = "research-mindmap.png";
     link.href = canvas.toDataURL();
