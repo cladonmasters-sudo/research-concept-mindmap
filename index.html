@@ -3,45 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research Mind Map</title>
+  <title>Research Brainstorm Mind Map</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <header>
-    <h1>Research Mind Map</h1>
-    <p>A simple brainstorming space for restarting your research ideas.</p>
+    <div>
+      <h1>Research Brainstorm Mind Map</h1>
+      <p>Double-click the canvas to add ideas. Drag bubbles to organize your thinking.</p>
+    </div>
+
+    <div class="top-buttons">
+      <button onclick="addMainIdea()">Main Idea</button>
+      <button onclick="connectMode()">Connect Ideas</button>
+      <button onclick="saveMap()">Save</button>
+      <button onclick="loadMap()">Load</button>
+      <button onclick="clearMap()">Clear</button>
+      <button onclick="exportPNG()">Export PNG</button>
+      <button onclick="window.print()">Export PDF</button>
+    </div>
   </header>
 
   <main>
-    <aside class="panel">
-      <h2>Start Thinking</h2>
+    <aside>
+      <h2>Brainstorm Panel</h2>
 
-      <label>Research Title / Main Idea</label>
-      <textarea id="researchTitle" placeholder="Type your research title or main idea..."></textarea>
+      <label>Main Research Idea</label>
+      <textarea id="mainIdea" placeholder="Type your research topic or title..."></textarea>
 
-      <label>New Idea</label>
-      <input id="conceptInput" type="text" placeholder="Example: learner needs" />
+      <label>Quick Idea</label>
+      <input id="quickIdea" type="text" placeholder="Example: learner needs" />
 
       <label>Short Note</label>
-      <textarea id="conceptNotes" placeholder="Write a short note..."></textarea>
+      <textarea id="quickNote" placeholder="Optional note..."></textarea>
 
-      <button onclick="startMindMap()">Start Mind Map</button>
-      <button onclick="addConcept()">Add Idea</button>
-      <button onclick="clearInputs()">Clear Text</button>
-      <button onclick="saveProject()">Save</button>
-      <button onclick="loadProject()">Load</button>
-      <button onclick="exportPNG()">Export PNG</button>
-      <button onclick="window.print()">Export PDF</button>
+      <button onclick="addQuickIdea()">Add Quick Idea</button>
 
-      <p class="hint">
-        Tip: Drag the cards around while you brainstorm.
-      </p>
+      <div class="guide">
+        <h3>How to use</h3>
+        <p>1. Type your main research idea.</p>
+        <p>2. Click Main Idea.</p>
+        <p>3. Double-click the canvas to add more bubbles.</p>
+        <p>4. Drag bubbles around while thinking.</p>
+        <p>5. Use Connect Ideas to draw simple links.</p>
+      </div>
     </aside>
 
-    <section class="canvas-area">
-      <h2>Mind Map Canvas</h2>
-      <div id="mindmap"></div>
+    <section id="canvasWrap">
+      <svg id="lines"></svg>
+      <div id="canvas"></div>
     </section>
   </main>
 
