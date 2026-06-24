@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Concept Mapping Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Research Concept Mapping Studio</h1>
+    <p>Build your MAEd-SPED research concept map, framework, and notes.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Research Information</h2>
+
+      <label>Research Title</label>
+      <textarea id="researchTitle" placeholder="Type your research title here..."></textarea>
+
+      <label>Main Problem</label>
+      <textarea id="mainProblem" placeholder="Type your main research problem..."></textarea>
+
+      <label>Concept Name</label>
+      <input id="conceptInput" type="text" placeholder="Example: Inclusive Education" />
+
+      <label>Concept Type</label>
+      <select id="conceptType">
+        <option value="variable">Variable</option>
+        <option value="theory">Theory</option>
+        <option value="literature">Literature</option>
+        <option value="question">Research Question</option>
+        <option value="methodology">Methodology</option>
+        <option value="sped">SPED Connection</option>
+      </select>
+
+      <label>Notes / Citation</label>
+      <textarea id="conceptNotes" placeholder="Add notes, APA citation, or quotation..."></textarea>
+
+      <button onclick="addConcept()">Add Concept</button>
+      <button onclick="generateFramework()">Generate Sample Framework</button>
+      <button onclick="saveProject()">Save Project</button>
+      <button onclick="loadProject()">Load Project</button>
+      <button onclick="exportPNG()">Export PNG</button>
+      <button onclick="window.print()">Export PDF</button>
+    </section>
+
+    <section class="canvas-area">
+      <h2>Mind Map Canvas</h2>
+      <div id="mindmap"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
