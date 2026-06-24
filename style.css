@@ -5,14 +5,14 @@
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #f7f3ea;
-  color: #2f2f2f;
+  background: #f6f0e6;
+  color: #2b2b2b;
 }
 
 header {
   padding: 18px 28px;
-  background: #efe7d8;
-  border-bottom: 1px solid #d8ccb8;
+  background: #eadfce;
+  border-bottom: 1px solid #d4c5ae;
 }
 
 header h1 {
@@ -21,31 +21,37 @@ header h1 {
 }
 
 header p {
-  margin: 4px 0 0;
+  margin: 5px 0 0;
   color: #6b6255;
 }
 
 main {
   display: flex;
-  height: calc(100vh - 85px);
+  height: calc(100vh - 86px);
 }
 
 .panel {
-  width: 300px;
+  width: 320px;
   padding: 18px;
-  background: #fbf8f1;
-  border-right: 1px solid #d8ccb8;
+  background: #fbf7ef;
+  border-right: 1px solid #d4c5ae;
   overflow-y: auto;
+}
+
+.panel h2,
+.canvas-area h2 {
+  margin-top: 0;
 }
 
 .canvas-area {
   flex: 1;
   padding: 18px;
+  overflow: auto;
 }
 
 label {
   display: block;
-  margin-top: 12px;
+  margin-top: 14px;
   font-weight: 600;
 }
 
@@ -54,9 +60,10 @@ textarea {
   width: 100%;
   margin-top: 6px;
   padding: 10px;
-  border: 1px solid #cfc4b2;
+  border: 1px solid #cbbda8;
   border-radius: 10px;
-  background: white;
+  background: #fffdf8;
+  color: #2b2b2b;
   font-size: 14px;
 }
 
@@ -71,14 +78,20 @@ button {
   padding: 10px;
   border: 1px solid #b8aa95;
   border-radius: 10px;
-  background: #e8dccb;
-  color: #2f2f2f;
+  background: #e6dac8;
+  color: #2b2b2b;
   font-weight: 600;
   cursor: pointer;
 }
 
 button:hover {
-  background: #ded0bd;
+  background: #d9cbb7;
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #6b6255;
 }
 
 #mindmap {
@@ -86,24 +99,24 @@ button:hover {
   min-width: 1100px;
   min-height: 720px;
   background: #fffdf8;
-  border: 1px solid #d8ccb8;
+  border: 1px solid #d4c5ae;
   border-radius: 18px;
 }
 
 .node {
   position: absolute;
-  width: 210px;
+  width: 220px;
   padding: 14px;
   border-radius: 16px;
-  background: white;
-  color: #2f2f2f;
-  border: 1px solid #d6c8b6;
+  background: #ffffff;
+  color: #2b2b2b;
+  border: 1px solid #d0c0aa;
   cursor: move;
   box-shadow: 0 4px 12px rgba(80, 60, 40, 0.12);
 }
 
 .node.main {
-  background: #f1e4cf;
+  background: #f0e3d0;
   border: 2px solid #b8aa95;
 }
 
@@ -121,17 +134,22 @@ button:hover {
 
 .node button {
   margin-top: 8px;
-  background: #f4eee5;
+  padding: 7px;
+  background: #f5eee4;
   font-size: 12px;
 }
 
 @media print {
-  .panel,
-  header {
+  header,
+  .panel {
     display: none;
   }
 
   main {
     height: auto;
+  }
+
+  #mindmap {
+    border: none;
   }
 }
