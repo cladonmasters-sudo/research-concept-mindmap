@@ -3,43 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research Concept Mapping Studio</title>
+  <title>Research Mind Map</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header>
-    <h1>Research Concept Mapping Studio</h1>
-    <p>Build your MAEd-SPED research concept map, framework, and notes.</p>
+    <h1>Research Mind Map</h1>
+    <p>A simple brainstorming space for restarting your research ideas.</p>
   </header>
 
   <main>
-    <section class="panel">
-      <h2>Research Information</h2>
+    <aside class="panel">
+      <h2>Start Thinking</h2>
 
-      <label>Research Title</label>
-      <textarea id="researchTitle" placeholder="Type your research title here..."></textarea>
+      <label>Research Title / Main Idea</label>
+      <textarea id="researchTitle" placeholder="Type your research title or main idea..."></textarea>
 
-      <label>Main Problem</label>
-      <textarea id="mainProblem" placeholder="Type your main research problem..."></textarea>
+      <label>New Idea</label>
+      <input id="conceptInput" type="text" placeholder="Example: learner needs" />
 
-      <label>Concept Name</label>
-      <input id="conceptInput" type="text" placeholder="Example: Inclusive Education" />
+      <label>Short Note</label>
+      <textarea id="conceptNotes" placeholder="Write a short note..."></textarea>
 
-      <label>Concept Type</label>
-      <select id="conceptType">
-        <option value="variable">Variable</option>
-        <option value="theory">Theory</option>
-        <option value="literature">Literature</option>
-        <option value="question">Research Question</option>
-        <option value="methodology">Methodology</option>
-        <option value="sped">SPED Connection</option>
-      </select>
+      <button onclick="startMindMap()">Start Mind Map</button>
+      <button onclick="addConcept()">Add Idea</button>
+      <button onclick="clearInputs()">Clear Text</button>
+      <button onclick="saveProject()">Save</button>
+      <button onclick="loadProject()">Load</button>
+      <button onclick="exportPNG()">Export PNG</button>
+      <button onclick="window.print()">Export PDF</button>
 
-      <label>Notes / Citation</label>
-      <textarea id="conceptNotes" placeholder="Add notes, APA citation, or quotation..."></textarea>
-
-     
-    </section>
+      <p class="hint">
+        Tip: Drag the cards around while you brainstorm.
+      </p>
+    </aside>
 
     <section class="canvas-area">
       <h2>Mind Map Canvas</h2>
