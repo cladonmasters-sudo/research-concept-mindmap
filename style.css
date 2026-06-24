@@ -4,63 +4,64 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #1f2937;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f7f3ea;
+  color: #2f2f2f;
 }
 
 header {
-  background: #243b53;
-  color: white;
-  padding: 20px 30px;
+  padding: 18px 28px;
+  background: #efe7d8;
+  border-bottom: 1px solid #d8ccb8;
 }
 
 header h1 {
   margin: 0;
+  font-size: 24px;
 }
 
 header p {
-  margin-bottom: 0;
+  margin: 4px 0 0;
+  color: #6b6255;
 }
 
 main {
   display: flex;
-  height: calc(100vh - 95px);
+  height: calc(100vh - 85px);
 }
 
 .panel {
-  width: 330px;
-  padding: 20px;
-  background: white;
-  border-right: 1px solid #d1d5db;
+  width: 300px;
+  padding: 18px;
+  background: #fbf8f1;
+  border-right: 1px solid #d8ccb8;
   overflow-y: auto;
 }
 
 .canvas-area {
   flex: 1;
-  padding: 20px;
-  overflow: auto;
+  padding: 18px;
 }
 
 label {
   display: block;
-  margin-top: 14px;
-  font-weight: bold;
+  margin-top: 12px;
+  font-weight: 600;
 }
 
 input,
-select,
 textarea {
   width: 100%;
   margin-top: 6px;
   padding: 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
+  border: 1px solid #cfc4b2;
+  border-radius: 10px;
+  background: white;
   font-size: 14px;
 }
 
 textarea {
-  min-height: 70px;
+  min-height: 80px;
   resize: vertical;
 }
 
@@ -68,58 +69,60 @@ button {
   width: 100%;
   margin-top: 10px;
   padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-weight: bold;
+  border: 1px solid #b8aa95;
+  border-radius: 10px;
+  background: #e8dccb;
+  color: #2f2f2f;
+  font-weight: 600;
   cursor: pointer;
 }
 
 button:hover {
-  background: #1d4ed8;
+  background: #ded0bd;
 }
 
 #mindmap {
   position: relative;
-  min-width: 1200px;
-  min-height: 750px;
-  background: white;
-  border: 2px dashed #cbd5e1;
-  border-radius: 14px;
+  min-width: 1100px;
+  min-height: 720px;
+  background: #fffdf8;
+  border: 1px solid #d8ccb8;
+  border-radius: 18px;
 }
 
 .node {
   position: absolute;
-  width: 190px;
-  padding: 12px;
-  border-radius: 14px;
-  color: white;
+  width: 210px;
+  padding: 14px;
+  border-radius: 16px;
+  background: white;
+  color: #2f2f2f;
+  border: 1px solid #d6c8b6;
   cursor: move;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 12px rgba(80, 60, 40, 0.12);
+}
+
+.node.main {
+  background: #f1e4cf;
+  border: 2px solid #b8aa95;
 }
 
 .node h3 {
   margin: 0 0 8px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .node p {
   margin: 0;
   font-size: 12px;
+  color: #5f574d;
   line-height: 1.4;
 }
 
-.variable { background: #2563eb; }
-.theory { background: #16a34a; }
-.literature { background: #f97316; }
-.question { background: #7c3aed; }
-.methodology { background: #dc2626; }
-.sped { background: #0f766e; }
-
 .node button {
   margin-top: 8px;
-  background: rgba(255, 255, 255, 0.25);
+  background: #f4eee5;
+  font-size: 12px;
 }
 
 @media print {
@@ -130,9 +133,5 @@ button:hover {
 
   main {
     height: auto;
-  }
-
-  #mindmap {
-    border: none;
   }
 }
